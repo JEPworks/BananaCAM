@@ -10,7 +10,7 @@ import android.view.Menu;
 /**
  * Created by Xavier Morales on 9/12/2014.
  */
-public class SplashScreenActivity extends Activity{
+public class SplashScreenActivity extends Activity {
     private static final int SPLASH_DISPLAY_LENGTH = 1000;
 
     @Override

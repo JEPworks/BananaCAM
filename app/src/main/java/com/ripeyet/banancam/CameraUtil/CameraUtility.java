@@ -10,26 +10,26 @@ import android.provider.MediaStore;
  */
 public class CameraUtility {
 
-    private Uri fileUri;
-    private Activity activity;
+    public Activity activity;
     public static int RESULT_TAKE_PICTURE = 1;
 
-    CameraUtility(Activity activity, Uri uri) {
+    public CameraUtility(Activity activity) {
         this.activity = activity;
-        this.fileUri = uri;
     }
 
-    public void takePicture() {
+    public Uri takePicture() {
         Intent intent = new Intent(
                 MediaStore.ACTION_IMAGE_CAPTURE);
 
         // Saves the output image uri
-        fileUri = Utils_Image_Options
+        Uri fileUri = Utils_Image_Options
                 .getOutputMediaFileUri(Utils_Image_Options.MEDIA_TYPE_IMAGE);
+
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
         activity.startActivityForResult(intent, RESULT_TAKE_PICTURE);
+        return fileUri;
     }
 
 

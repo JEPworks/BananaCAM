@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ripeyet.banancam.CameraUtil.CameraUtility;
+
 
 public class RoomSelectionActivity extends Activity implements ActionBar.TabListener {
 
@@ -82,7 +84,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.room_selection, menu);
-        Toast.makeText(this,"TEST",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "TEST", Toast.LENGTH_LONG).show();
         return true;
     }
 
@@ -97,6 +99,9 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         }
         if (id == R.id.CameraIcon) {
             Toast.makeText(this, "CAMERA PUSHED", Toast.LENGTH_LONG).show();
+            CameraUtility cameraUtility = new CameraUtility(this);
+            cameraUtility.takePicture();
+
             return true;
         }
 
@@ -144,13 +149,13 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
-            switch (position) {
+            switch (position) { 
                 case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
+                    return getString(R.string.title_section1).toUpperCase(Locale.US);
                 case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
+                    return getString(R.string.title_section2).toUpperCase(Locale.US);
                 case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
+                    return getString(R.string.title_section3).toUpperCase(Locale.US);
             }
             return null;
         }
@@ -183,7 +188,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_room_selection, container, false);
             return rootView;
         }
