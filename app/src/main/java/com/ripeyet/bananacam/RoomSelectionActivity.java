@@ -42,7 +42,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_selection);
 
-        // Set up the action bar.
+        // Set up the action bar. hfadjsklfhsd
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
