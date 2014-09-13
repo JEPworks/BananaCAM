@@ -35,10 +35,10 @@ public class Utils_Image_Options {
 
 		// Create the storage directory if it does not exist
 		if (!mediaStorageDir.exists()) {
-			if (!mediaStorageDir.mkdirs()) {
+	/*		if (!mediaStorageDir.mkdirs()) {
 				Log.d("MyCameraApp", "failed to create directory");
 				return null;
-			}
+			}*/
 		}
 
 		// Create a media file name
