@@ -1,5 +1,6 @@
 package com.ripeyet.bananacam.tasks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,11 +20,16 @@ public class UploadImageTask extends AsyncTask<String,String,String> {
     private Context ctx;
     private Uri fileUri;
     private int locationIdx;
+    ProgressDialog progressDialog;
 
     public UploadImageTask(Context ctx, Uri fileUri, int locationIdx) {
         this.ctx = ctx;
         this.fileUri = fileUri;
         this.locationIdx = locationIdx;
+        progressDialog = new ProgressDialog(ctx);
+        progressDialog.setMessage("Uploading Banana");
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
     }
 
     private String getFileName() {
@@ -73,6 +79,9 @@ public class UploadImageTask extends AsyncTask<String,String,String> {
         super.onPostExecute(s);
         if (s != null) {
             Toast.makeText(this.ctx, s, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this.ctx,"Upload Failed",Toast.LENGTH_LONG).show();
         }
+        progressDialog.cancel();
     }
 }
