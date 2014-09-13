@@ -5,4 +5,8 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/CameraIcon"
+        android:title="Camera"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_action_camera" />
 </menu>

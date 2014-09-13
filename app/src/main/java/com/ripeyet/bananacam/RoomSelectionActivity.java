@@ -95,6 +95,11 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.CameraIcon) {
+            Toast.makeText(this, "CAMERA PUSHED", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
