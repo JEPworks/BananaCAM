@@ -42,7 +42,7 @@ public class UploadImageActivity extends Activity {
             }
         });
 
-        Spinner spinner = (Spinner) findViewById(R.id.sRoomSelector);
+        final Spinner spinner = (Spinner) findViewById(R.id.sRoomSelector);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.rooms_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -54,7 +54,7 @@ public class UploadImageActivity extends Activity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UploadImageTask task = new UploadImageTask(ctx, fileUri);
+                UploadImageTask task = new UploadImageTask(ctx, fileUri, spinner.getSelectedItemPosition());
                 task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         });
