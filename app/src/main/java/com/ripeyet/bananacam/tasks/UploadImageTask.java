@@ -6,8 +6,10 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.jcraft.jsch.*;
+import com.ripeyet.bananacam.R;
 
 import java.sql.*;
+import java.util.*;
 
 /**
  * Created by Josephine on 9/12/2014.
@@ -16,10 +18,12 @@ public class UploadImageTask extends AsyncTask<String,String,String> {
 
     private Context ctx;
     private Uri fileUri;
+    private int locationIdx;
 
-    public UploadImageTask(Context ctx, Uri fileUri) {
+    public UploadImageTask(Context ctx, Uri fileUri, int locationIdx) {
         this.ctx = ctx;
         this.fileUri = fileUri;
+        this.locationIdx = locationIdx;
     }
 
     private String getFileName() {
@@ -52,7 +56,8 @@ public class UploadImageTask extends AsyncTask<String,String,String> {
             Connection conn = DriverManager.getConnection("jdbc:mysql://23.94.32.228:3306/ripeyet?user=root&password=pass");
             Statement stmt = conn.createStatement();
             String url = "http://23.94.32.228/bananacam/" + getFileName();
-            String query = "INSERT INTO bananacam VALUES (NULL, 'testUser', '" + url + "', 0, 0, 'Kitchen')";
+            String[] rooms = ctx.getResources().getStringArray(R.array.rooms_array);
+            String query = "INSERT INTO bananacam VALUES (NOW(), '" + url + "', '" + rooms[locationIdx] + "')";
             int res = stmt.executeUpdate(query);
 
             return ""+res;
