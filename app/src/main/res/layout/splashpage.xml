@@ -6,6 +6,16 @@
     android:orientation="vertical"
     android:gravity="center">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Is it ripeyet?"
+        android:textColor="#E5E500"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-thin"/>
+
     <ImageView
         android:id="@+id/splashscreen"
         android:layout_width="wrap_content"
@@ -18,7 +28,9 @@
         android:layout_height="wrap_content"
         android:text="Let's go BANANAS"
         android:textColor="#E5E500"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-thin"/>
 
 </LinearLayout>
