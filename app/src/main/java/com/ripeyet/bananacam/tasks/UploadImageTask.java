@@ -28,6 +28,7 @@ public class UploadImageTask extends AsyncTask<String, String, String> {
         progressDialog = new ProgressDialog(act);
         progressDialog.setMessage("Uploading Banana");
         progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
 
