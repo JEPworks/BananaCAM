@@ -54,7 +54,7 @@ public class BananaViewerFragment extends Fragment {
                     @Override
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                         progressBar.setVisibility(View.GONE);
-                        ((ImageView) view).setImageResource(R.drawable.banana_sad);
+                        ((ImageView) view).setImageResource(R.drawable.distressed_banana);
                     }
 
                     @Override
