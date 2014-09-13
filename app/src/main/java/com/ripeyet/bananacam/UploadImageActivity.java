@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -35,6 +36,14 @@ public class UploadImageActivity extends Activity {
             }
         });
 
+        Button uploadButton = (Button) findViewById(R.id.bUpload);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Upload code here
+            }
+        });
+
     }
 
     @Override
@@ -48,7 +57,7 @@ public class UploadImageActivity extends Activity {
                         Toast.LENGTH_LONG).show();
             } else {
                 ImageLoader imageLoader = ImageLoader.getInstance();
-                imageLoader.displayImage(fileUri.toString(),cameraImage);
+                imageLoader.displayImage(fileUri.toString(), cameraImage);
 
             }
 

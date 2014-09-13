@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/cameralarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="246dp"
+        android:layout_height="246dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="68dp"
         android:layout_marginBottom="68dp"
