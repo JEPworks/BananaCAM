@@ -7,20 +7,19 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ripeyet.bananacam.tasks.ConnectDatabaseTask;
 import com.ripeyet.banancam.CameraUtil.CameraUtility;
-
 
 public class RoomSelectionActivity extends Activity implements ActionBar.TabListener {
 
@@ -84,7 +83,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.room_selection, menu);
-        Toast.makeText(this, "TEST", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"TEST",Toast.LENGTH_LONG).show();
         return true;
     }
 
@@ -95,6 +94,8 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            ConnectDatabaseTask task = new ConnectDatabaseTask(this);
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             return true;
         }
         if (id == R.id.CameraIcon) {
