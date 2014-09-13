@@ -1,6 +1,7 @@
 package com.ripeyet.bananacam.tasks;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -11,19 +12,28 @@ import java.sql.*;
 /**
  * Created by Josephine on 9/12/2014.
  */
-public class ConnectDatabaseTask extends AsyncTask<String,String,String> {
+public class UploadImageTask extends AsyncTask<String,String,String> {
 
     private Context ctx;
+    private Uri fileUri;
 
-    public ConnectDatabaseTask(Context ctx) {
+    public UploadImageTask(Context ctx, Uri fileUri) {
         this.ctx = ctx;
+        this.fileUri = fileUri;
+    }
+
+    private String getFileName() {
+        String[] names = this.fileUri.getPath().split("/");
+        return names[names.length-1];
     }
 
     @Override
     protected String doInBackground(String... strings) {
         JSch jsch = new JSch();
         Session session = null;
+
         try {
+            // Upload image
             session = jsch.getSession("root", "23.94.32.228", 22);
             session.setConfig("StrictHostKeyChecking", "no");
             session.setPassword("pass");
@@ -32,30 +42,20 @@ public class ConnectDatabaseTask extends AsyncTask<String,String,String> {
             Channel channel = session.openChannel("sftp");
             channel.connect();
             ChannelSftp sftpChannel = (ChannelSftp) channel;
-            sftpChannel.get("remotefile.txt", "localfile.txt");
+            String remoteUri = "/var/www/bananacam/" + getFileName();
+            sftpChannel.put(fileUri.getPath(), remoteUri);
             sftpChannel.exit();
             session.disconnect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        } catch (SftpException e) {
-            e.printStackTrace();
-        }
 
-        try {
+            // Update database
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection conn = DriverManager.getConnection("jdbc:mysql://23.94.32.228:3306/ripeyet?user=root&password=pass");
             Statement stmt = conn.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM bananacam");
+            String url = "http://23.94.32.228/bananacam/" + getFileName();
+            String query = "INSERT INTO bananacam VALUES (NULL, 'testUser', '" + url + "', 0, 0, 'Kitchen')";
+            int res = stmt.executeUpdate(query);
 
-            while (res.next()) {
-                Date timestamp = res.getDate("timestamp");
-                String user = res.getString("user");
-                String photo = res.getString("photo");
-                int ripeness = res.getInt("ripeness");
-                int count = res.getInt("count");
-
-                return user+" "+photo+" "+ripeness+" "+count;
-            }
+            return ""+res;
         }
         catch (Exception ex) {
             System.err.println(ex.getMessage());

@@ -1,8 +1,10 @@
 package com.ripeyet.bananacam;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ripeyet.bananacam.tasks.UploadImageTask;
 import com.ripeyet.banancam.CameraUtil.CameraUtility;
 
 /**
@@ -36,11 +39,14 @@ public class UploadImageActivity extends Activity {
             }
         });
 
+        final Context ctx = this;
+
         Button uploadButton = (Button) findViewById(R.id.bUpload);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Upload code here
+                UploadImageTask task = new UploadImageTask(ctx, fileUri);
+                task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         });
 

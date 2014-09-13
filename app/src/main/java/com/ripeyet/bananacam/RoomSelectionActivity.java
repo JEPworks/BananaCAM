@@ -18,8 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ripeyet.bananacam.tasks.ConnectDatabaseTask;
-import com.ripeyet.banancam.CameraUtil.CameraUtility;
+import com.ripeyet.bananacam.tasks.UploadImageTask;
 
 public class RoomSelectionActivity extends Activity implements ActionBar.TabListener {
 
@@ -93,8 +92,6 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            ConnectDatabaseTask task = new ConnectDatabaseTask(this);
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             return true;
         }
         if (id == R.id.CameraIcon) {
