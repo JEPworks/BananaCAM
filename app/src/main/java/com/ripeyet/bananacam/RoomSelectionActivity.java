@@ -17,7 +17,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ripeyet.bananacam.tasks.BananaViewerFragment;
+import com.ripeyet.bananacam.tasks.LoadImageTask;
 import com.ripeyet.bananacam.tasks.UploadImageTask;
 
 public class RoomSelectionActivity extends Activity implements ActionBar.TabListener {
@@ -31,6 +36,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
+    DisplayImageOptions imageOptions;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -46,12 +52,14 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         // When swiping between different sections, select the corresponding
@@ -132,7 +140,9 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            BananaViewerFragment fragment = new BananaViewerFragment();
+            fragment.setPosition(position);
+            return fragment;
         }
 
         @Override
@@ -165,12 +175,14 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static int currentView;
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
+            currentView = sectionNumber;
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -187,6 +199,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
             View rootView = inflater.inflate(R.layout.fragment_room_selection, container, false);
             return rootView;
         }
+
     }
 
 }

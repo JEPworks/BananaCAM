@@ -47,13 +47,13 @@ public class UploadImageActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        final Context ctx = this;
+        final Activity act = this;
 
         uploadButton = (Button) findViewById(R.id.bUpload);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UploadImageTask task = new UploadImageTask(ctx, fileUri, spinner.getSelectedItemPosition());
+                UploadImageTask task = new UploadImageTask(act, fileUri, spinner.getSelectedItemPosition());
                 task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         });
