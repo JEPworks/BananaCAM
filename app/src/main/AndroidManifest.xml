@@ -18,9 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RoomSelectionActivity">
+        <activity android:name=".RoomSelectionActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".UploadImageActivity">
+        <activity android:name=".UploadImageActivity"
+            android:screenOrientation="portrait">
         </activity>
 
 
