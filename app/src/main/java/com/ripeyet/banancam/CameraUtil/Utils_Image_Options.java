@@ -30,15 +30,17 @@ public class Utils_Image_Options {
 				Environment
 						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
 				"MyCameraApp");
+
 		// This location works best if you want the created images to be shared
 		// between applications and persist after your app has been uninstalled.
 
 		// Create the storage directory if it does not exist
 		if (!mediaStorageDir.exists()) {
-	/*		if (!mediaStorageDir.mkdirs()) {
-				Log.d("MyCameraApp", "failed to create directory");
-				return null;
-			}*/
+			if (!mediaStorageDir.mkdirs()) {
+				mediaStorageDir = new File (
+                              Environment.getDataDirectory(),
+                        "MyCameraApp");
+			}
 		}
 
 		// Create a media file name
