@@ -36,7 +36,6 @@ public class UploadImageActivity extends Activity {
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UploadImageActivity.this, "CAMERA PUSHED", Toast.LENGTH_LONG).show();
                 CameraUtility cameraUtility = new CameraUtility(UploadImageActivity.this);
                 fileUri = cameraUtility.takePicture();
             }

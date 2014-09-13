@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * Created by Josephine on 9/12/2014.
  */
-public class UploadImageTask extends AsyncTask<String,String,String> {
+public class UploadImageTask extends AsyncTask<String, String, String> {
 
     private Context ctx;
     private Uri fileUri;
@@ -66,7 +66,7 @@ public class UploadImageTask extends AsyncTask<String,String,String> {
             String query = "INSERT INTO bananacam VALUES (NOW(), '" + url + "', '" + rooms[locationIdx] + "')";
             int res = stmt.executeUpdate(query);
 
-            return ""+res;
+            return url;
         }
         catch (Exception ex) {
             System.err.println(ex.getMessage());
