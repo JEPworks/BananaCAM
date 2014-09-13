@@ -45,6 +45,7 @@ public class UploadImageTask extends AsyncTask<String, String, String> {
         try {
             // Upload image
             session = jsch.getSession("root", "23.94.32.228", 22);
+            session.setTimeout(10000);
             session.setConfig("StrictHostKeyChecking", "no");
             session.setPassword("pass");
             session.connect();
