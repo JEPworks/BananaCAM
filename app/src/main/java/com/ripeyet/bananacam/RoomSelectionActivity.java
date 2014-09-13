@@ -99,9 +99,6 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == R.id.CameraIcon) {
             Intent intent = new Intent(RoomSelectionActivity.this, UploadImageActivity.class);
             startActivity(intent);
