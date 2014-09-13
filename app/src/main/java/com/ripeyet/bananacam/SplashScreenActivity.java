@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 
 /**
  * Created by Xavier Morales on 9/12/2014.
@@ -16,7 +19,15 @@ public class SplashScreenActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Create global configuration and initialize ImageLoader with this config
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+        .build();
+        ImageLoader.getInstance().init(config);
+
         setContentView(R.layout.splashpage);
+
+
+
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable() {

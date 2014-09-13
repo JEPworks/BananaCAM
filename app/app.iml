@@ -83,6 +83,7 @@
     <orderEntry type="library" exported="" name="jsch-0.1.51" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-20.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-20.0.0" level="project" />
+    <orderEntry type="library" exported="" name="universal-image-loader-1.9.3" level="project" />
     <orderEntry type="library" exported="" name="mysql-connector-java-5.1.32-bin" level="project" />
   </component>
 </module>

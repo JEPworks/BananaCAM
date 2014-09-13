@@ -7,6 +7,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
@@ -99,10 +100,8 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
             return true;
         }
         if (id == R.id.CameraIcon) {
-            Toast.makeText(this, "CAMERA PUSHED", Toast.LENGTH_LONG).show();
-            CameraUtility cameraUtility = new CameraUtility(this);
-            cameraUtility.takePicture();
-
+            Intent intent = new Intent(RoomSelectionActivity.this, UploadImageActivity.class);
+            startActivity(intent);
             return true;
         }
 
