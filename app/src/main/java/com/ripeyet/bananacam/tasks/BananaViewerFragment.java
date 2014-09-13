@@ -13,17 +13,17 @@ import com.ripeyet.bananacam.R;
  */
 public class BananaViewerFragment extends Fragment {
 
-        private int position;
+    private int position;
 
-        public BananaViewerFragment(int position) {
-            this.position = position;
-        }
+    public BananaViewerFragment(int position) {
+        this.position = position;
+    }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_room_selection, container, false);
-            return rootView;
-        }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_room_selection, container, false);
+        return rootView;
     }
 }
+
