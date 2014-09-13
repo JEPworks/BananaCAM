@@ -7,5 +7,11 @@
     <string name="title_section3">Suite 350</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string-array name="rooms_array">
+        <item>Kitchen</item>
+        <item>Suite 300</item>
+        <item>Suite 350</item>
+    </string-array>
+
 
 </resources>

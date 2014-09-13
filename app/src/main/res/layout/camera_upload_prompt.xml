@@ -14,12 +14,12 @@
         android:layout_marginBottom="68dp"
         android:src="@drawable/cameralarge"/>
 
-    <EditText
-        android:id="@+id/pictureText"
-        android:layout_width="match_parent"
+    <Spinner
+        android:id="@+id/sRoomSelector"
+        android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_height="48dp"
-        android:layout_margin="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         />
 
     <Button

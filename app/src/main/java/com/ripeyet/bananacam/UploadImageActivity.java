@@ -7,8 +7,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -22,6 +24,7 @@ public class UploadImageActivity extends Activity {
 
     private ImageView cameraImage;
     private Uri fileUri;
+    Button uploadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,15 @@ public class UploadImageActivity extends Activity {
             }
         });
 
+        Spinner spinner = (Spinner) findViewById(R.id.sRoomSelector);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.rooms_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
         final Context ctx = this;
 
-        Button uploadButton = (Button) findViewById(R.id.bUpload);
+        uploadButton = (Button) findViewById(R.id.bUpload);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +58,7 @@ public class UploadImageActivity extends Activity {
                 task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         });
+        uploadButton.setEnabled(false);
 
     }
 
@@ -56,18 +66,15 @@ public class UploadImageActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
-
             if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Cancelled",
                         Toast.LENGTH_LONG).show();
             } else {
                 ImageLoader imageLoader = ImageLoader.getInstance();
                 imageLoader.displayImage(fileUri.toString(), cameraImage);
+                uploadButton.setEnabled(true);
 
             }
-
-
 
     }
 }
