@@ -1,4 +1,4 @@
-package com.ripeyet.banancam.CameraUtil;
+package com.ripeyet.bananacam.CameraUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -10,7 +10,6 @@ import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 
 public class Utils_Image_Options {
 	public static final int MEDIA_TYPE_IMAGE = 1;

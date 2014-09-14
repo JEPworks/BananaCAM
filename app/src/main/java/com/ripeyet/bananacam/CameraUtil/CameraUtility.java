@@ -1,4 +1,4 @@
-package com.ripeyet.banancam.CameraUtil;
+package com.ripeyet.bananacam.CameraUtil;
 
 import android.app.Activity;
 import android.content.Intent;

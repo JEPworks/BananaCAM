@@ -1,7 +1,6 @@
 package com.ripeyet.bananacam;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ripeyet.bananacam.tasks.UploadImageTask;
-import com.ripeyet.banancam.CameraUtil.CameraUtility;
+import com.ripeyet.bananacam.CameraUtil.CameraUtility;
 
 /**
  * Created by James on 9/13/2014.
@@ -65,15 +64,12 @@ public class UploadImageActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-            if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Cancelled",
-                        Toast.LENGTH_LONG).show();
-            } else {
-                ImageLoader imageLoader = ImageLoader.getInstance();
-                imageLoader.displayImage(fileUri.toString(), cameraImage);
-                uploadButton.setEnabled(true);
-
-            }
-
+        if (resultCode == RESULT_CANCELED) {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+        } else {
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.displayImage(fileUri.toString(), cameraImage);
+            uploadButton.setEnabled(true);
+        }
     }
 }

@@ -8,7 +8,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -17,13 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.ripeyet.bananacam.tasks.BananaViewerFragment;
-import com.ripeyet.bananacam.tasks.LoadImageTask;
-import com.ripeyet.bananacam.tasks.UploadImageTask;
 
 public class RoomSelectionActivity extends Activity implements ActionBar.TabListener {
 
@@ -36,7 +30,6 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-    DisplayImageOptions imageOptions;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -48,7 +41,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_selection);
 
-        // Set up the action bar. hfadjsklfhsd
+        // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -150,7 +143,6 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
 
         @Override
         public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
             switch (position) { 
                 case 0:
                     return getString(R.string.title_section1).toUpperCase(Locale.US);
@@ -172,14 +164,12 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        private static int currentView;
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
-            currentView = sectionNumber;
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -193,8 +183,7 @@ public class RoomSelectionActivity extends Activity implements ActionBar.TabList
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_room_selection, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_room_selection, container, false);
         }
 
     }

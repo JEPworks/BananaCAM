@@ -2,14 +2,16 @@ package com.ripeyet.bananacam.tasks;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.jcraft.jsch.*;
+import com.parse.*;
 import com.ripeyet.bananacam.R;
 
-import java.sql.*;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by Josephine on 9/12/2014.
@@ -18,13 +20,14 @@ public class UploadImageTask extends AsyncTask<String, String, String> {
 
     private Activity act;
     private Uri fileUri;
-    private int locationIdx;
+    private int location;
     ProgressDialog progressDialog;
 
-    public UploadImageTask(Activity act, Uri fileUri, int locationIdx) {
+    public UploadImageTask(Activity act, Uri fileUri, int location) {
         this.act = act;
         this.fileUri = fileUri;
-        this.locationIdx = locationIdx;
+        this.location = location;
+
         progressDialog = new ProgressDialog(act);
         progressDialog.setMessage("Uploading Banana");
         progressDialog.setIndeterminate(true);
@@ -33,58 +36,44 @@ public class UploadImageTask extends AsyncTask<String, String, String> {
     }
 
     private String getFileName() {
-        String[] names = this.fileUri.getPath().split("/");
+        String[] names = fileUri.getPath().split("/");
         return names[names.length-1];
     }
 
     @Override
     protected String doInBackground(String... strings) {
-        JSch jsch = new JSch();
-        Session session = null;
+        String[] rooms = act.getResources().getStringArray(R.array.rooms_array);
 
-        try {
-            // Upload image
-            session = jsch.getSession("root", "23.94.32.228", 22);
-            session.setTimeout(10000);
-            session.setConfig("StrictHostKeyChecking", "no");
-            session.setPassword("pass");
-            session.connect();
+        // Create image object
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+        Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+        byte[] image = stream.toByteArray();
 
-            Channel channel = session.openChannel("sftp");
-            channel.connect();
-            ChannelSftp sftpChannel = (ChannelSftp) channel;
-            String remoteUri = "/var/www/bananacam/" + getFileName();
-            sftpChannel.put(fileUri.getPath(), remoteUri);
-            sftpChannel.exit();
-            session.disconnect();
+        ParseFile file = new ParseFile(getFileName(), image);
+        file.saveInBackground();
 
-            // Update database
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://23.94.32.228:3306/ripeyet?user=root&password=pass");
-            Statement stmt = conn.createStatement();
-            String url = "http://23.94.32.228/bananacam/" + getFileName();
-            String[] rooms = act.getResources().getStringArray(R.array.rooms_array);
-            String query = "INSERT INTO bananacam VALUES (NOW(), '" + url + "', '" + rooms[locationIdx] + "')";
-            int res = stmt.executeUpdate(query);
+        // Update database with image and location
+        ParseObject testObject = new ParseObject("Banana");
+        testObject.put("image", file);
+        testObject.put("location", rooms[location]);
+        testObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    progressDialog.cancel();
+                    act.finish();
+                }
+                else {
+                    Toast.makeText(act, "Could not upload image", Toast.LENGTH_SHORT).show();
+                    progressDialog.cancel();
+                }
+            }
+        });
 
-            return url;
-        }
-        catch (Exception ex) {
-            System.err.println(ex.getMessage());
-        }
         return null;
     }
 
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        if (s != null) {
-            progressDialog.cancel();
-            this.act.finish();
-
-        } else {
-            Toast.makeText(this.act,"Could not upload image",Toast.LENGTH_LONG).show();
-            progressDialog.cancel();
-        }
-    }
 }
