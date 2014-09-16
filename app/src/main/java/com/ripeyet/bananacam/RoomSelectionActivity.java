@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.parse.ParsePush;
 
 public class RoomSelectionActivity extends Activity implements ActionBar.TabListener {
 

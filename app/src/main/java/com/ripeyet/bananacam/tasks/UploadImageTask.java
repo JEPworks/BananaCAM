@@ -42,7 +42,7 @@ public class UploadImageTask extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String[] rooms = act.getResources().getStringArray(R.array.rooms_array);
+        final String[] rooms = act.getResources().getStringArray(R.array.rooms_array);
 
         // Create image object
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -64,6 +64,10 @@ public class UploadImageTask extends AsyncTask<String, String, String> {
             public void done(ParseException e) {
                 if (e == null) {
                     progressDialog.cancel();
+                    ParsePush push = new ParsePush();
+                    push.setChannel(rooms[location].replaceAll("\\s",""));
+                    push.setMessage("New Banana Pic for " + rooms[location]);
+                    push.sendInBackground();
                     act.finish();
                 }
                 else {

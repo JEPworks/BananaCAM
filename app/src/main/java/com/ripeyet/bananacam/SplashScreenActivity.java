@@ -21,8 +21,7 @@ public class SplashScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Parse.initialize(this, "IfpakLFfSGFAPk1OXeIDH6XEbBP3yX9zoQIsrPvE", "52lXNqpn9bAqu3kQSYW9IoWNhsUapSQBmxfYT0Iu");
-
+        PushService.setDefaultPushCallback(this, RoomSelectionActivity.class);
         // Create global configuration and initialize ImageLoader with this config
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
         .build();
