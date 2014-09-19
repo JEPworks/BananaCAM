@@ -23,7 +23,7 @@ public class CameraUtility {
 
         // Saves the output image uri
         Uri fileUri = Utils_Image_Options
-                .getOutputMediaFileUri(Utils_Image_Options.MEDIA_TYPE_IMAGE);
+                .getOutputMediaFileUri(Utils_Image_Options.MEDIA_TYPE_IMAGE,activity);
 
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);

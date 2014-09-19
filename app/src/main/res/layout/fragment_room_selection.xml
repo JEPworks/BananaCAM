@@ -20,6 +20,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"/>
+    <TextView
+        android:id="@+id/createdDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="13/23/46"
+        android:background="#60000000"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:layout_alignParentTop="true"/>
 
     <ProgressBar
         android:id="@+id/pbImages"

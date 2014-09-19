@@ -8,6 +8,8 @@ import com.ripeyet.bananacam.R;
 
 import com.parse.*;
 
+import java.util.Calendar;
+
 
 /**
  * Created by Josephine on 9/13/2014.
@@ -35,7 +37,7 @@ public class LoadImageTask extends AsyncTask<String, String, String> {
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject photo, ParseException e) {
                 if (e == null) {
-                    handler.onCallComplete(photo.getParseFile("image"));
+                    handler.onCallComplete(photo);
                 }
                 else {
                     handler.onCallComplete(null);

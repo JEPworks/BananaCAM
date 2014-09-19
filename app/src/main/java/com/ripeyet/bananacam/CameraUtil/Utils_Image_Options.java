@@ -16,19 +16,17 @@ public class Utils_Image_Options {
 	public static final int MEDIA_TYPE_VIDEO = 2;
 
 	/** Create a file Uri for saving an image or video */
-	static Uri getOutputMediaFileUri(int type) {
-		return Uri.fromFile(getOutputMediaFile(type));
+	static Uri getOutputMediaFileUri(int type,Context context) {
+		return Uri.fromFile(getOutputMediaFile(type,context));
 	}
 
 	/** Create a File for saving an image or video */
-	private static File getOutputMediaFile(int type) {
+	private static File getOutputMediaFile(int type,Context context) {
 		// To be safe, you should check that the SDCard is mounted
 		// using Environment.getExternalStorageState() before doing this.
-
 		File mediaStorageDir = new File(
-				Environment
-						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-				"MyCameraApp");
+				context.getExternalCacheDir(),
+				"bananaCAM");
 
 		// This location works best if you want the created images to be shared
 		// between applications and persist after your app has been uninstalled.
@@ -36,10 +34,10 @@ public class Utils_Image_Options {
 		// Create the storage directory if it does not exist
 		if (!mediaStorageDir.exists()) {
 			if (!mediaStorageDir.mkdirs()) {
-				mediaStorageDir = new File (
-                              Environment.getDataDirectory(),
-                        "MyCameraApp");
-			}
+                mediaStorageDir = new File(
+                        context.getCacheDir(),
+                        "bananaCAM");
+            }
 		}
 
 		// Create a media file name
